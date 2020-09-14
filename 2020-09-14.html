@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制三角形</title>
+</head>
+
+
+
+<body>
+    <canvas id="cavsElem">
+      
+    </canvas>
+    <script>
+        var canvas = document.getElementById('cavsElem');
+        var context = canvas.getContext('2d');
+        canvas.width = 900;
+        canvas.height = 600;
+        canvas.style.border = "1px solid #000";
+        context.beginPath();
+        context.moveTo(100, 100);
+        context.lineTo(300, 100);
+        context.lineTo(300, 500);
+        context.closePath();
+        context.stroke();
+    </script>
+
+</body>
+
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>矩形和清除矩形</title>
+</head>
+
+<body>
+    <canvas id="woshinidie">
+        
+    </canvas>
+    <script>
+        var canvas = document.getElementById('woshinidie');
+        var context = canvas.getContext('2d');
+        canvas.width = 900;
+        canvas.height = 600;
+        canvas.style.border = "1px solid #000";
+        //绘制矩形
+        context.strokeRect(200, 50, 200, 100);
+        context.fillRect(200, 200, 200, 100);
+        //清除矩形
+        context.clearRect(100, 100, 200, 150);
+    </script>
+</body>
+
+</html>
