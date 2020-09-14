@@ -1,0 +1,29 @@
+圆形制作：
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圆形</title>
+</head>
+
+<body>
+    <canvas id="cavsElem" width="400" height="300"></canvas>
+    <script>
+        var context = document.getElementById("cavsElem").getContext("2d");
+        context.beginPath();
+        context.arc(100, 100, 100, 0, 2 * Math.PI, true);
+        context.closePath();
+        context.fillstyle = 'pink';
+        context.fill();
+        context.beginPath();
+        context.strokestyle = 'white';
+        context.lineWidth = 5;
+        context.arc(100, 100, 25, Math.pI / 6, 5 * Math.pI / 6, false);
+        context.stroke();
+    </script>
+
+</body>
+
+</html>
