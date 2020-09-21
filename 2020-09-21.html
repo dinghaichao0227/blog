@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function getMyPosition(){
+            if (window.navigator.geolocation){
+                alert("正在获取当前位置");
+                navigator.geolocation.getCurrentPosition(successPosition,errorPoition);
+            }else {
+                alert("您当前的浏览器不支持");
+            }
+        }
+        function successPosition(positon){
+            var id=position.coords.longitude;
+            var wd=position.coords.latitude;
+        }
+        function errorPoition(){
+            alert("获取当前位置失败");
+        }
+        getMyPosition();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
