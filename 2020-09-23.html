@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽</title>
+    <style>
+        body {
+            padding:0px;
+            margin:0px;
+            background-color:white;
+            position:relative;
+        }
+        .box {
+            width:150px;
+            height:15px;
+            background-color:pink;
+            position: absolute;
+            top:100px;
+            left:50px;
+        }
+.container {
+    width:300px;
+    height:150px;
+    background-color: green;
+    position:absolute;
+    top:100px;
+    left:50%;
+    margin-left:-150px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="box" draggable="true"></div>
+    <div class="container"></div>
+<script>
+    var box=document.querySelector('.box');
+    var container=document.querySelector('.container');
+    box.addEventListener('drag',function(){
+        console.log(1);
+    });
+    box.addEventListener('dragleave',function(){
+        console.log(2);
+    });
+    box.addEventListener('dragstart',function(){
+        this.style.backgroundColor='pink';
+        console.log(3);
+    });
+    box.addEventListener('dragend',function(ev){
+        this.style.backgroundColor='';
+        console.log(ev);
+    });
+    container.addEventListener('dragenter',function(){
+        this.style.backgroundColor='red';
+    });
+    container.addEventListener('dragover',function(ev){
+        this.style.backgroundColor='yellow';
+        ev.preventDefault();
+    });
+    container.addEventListener('drop',function(ev){
+        this.style.backgroundColor='red';
+        console.log(ev);
+        ev.preventDefault();
+    })
+</script>
+</body>
+</html>
