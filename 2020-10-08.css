@@ -1,0 +1,92 @@
+.hm_nav {
+    width:100%;
+    background: #fff;
+    border-bottom:1px solid #e0e0e0;
+}
+.hm_nav>ul {
+    width:100%;
+    padding:10px  0;
+}
+.hm_nav>ul>li {
+    width:25%;
+    float:left;
+}
+.hm_nav>ul>li>a {
+    display:block;
+}
+.hm_nav>ul>li>a>img {
+    width:40px;
+    height:40px;
+    display:block;
+    margin:0 auto;
+}
+.hm_nav>ul>li>a>p {
+    text-align: center;
+    color:#666;
+    font-size: 12px;
+    padding:6px 0;
+}
+.hm_product {
+    padding:0 5px;
+}
+.hm_product>.hm_product_box {
+    width:100%;
+    background: #fff;
+    margin-top:10px;
+    box-shadow: 0 0 1px #e0e0e0;
+}
+.hm_product>.hm_product_box>.hm_product_box_tit {
+    height:32px;
+    line-height: 32px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.hm_product>.hm_product_box>.hm_product_box_tit.no_border {
+    border-bottom:none;
+}
+.hm_product>.hm_product_box>.hm_product_box_tit>h3 {
+    font-weight:normal;
+    font-size:15px;
+    padding-left:20px;
+    position: relative;
+    color:#666;
+}
+.hm_product>.hm_product_box>.hm_product_box_tit>h3::before {
+    content:"";
+    position: absolute;
+    top:10px;
+    left:10px;
+    width:3px;
+    height:12px;
+    background: #d8505c;
+}
+.hm_sk .sk_icon {
+    background: url("../images/seckill-icon.png") no-repeat;
+    background-size:16px 20px;
+    width:16px;
+    height:20px;
+    float:left;
+}
+.hm_sk .sk_name {
+    color:#d8505c;
+    font-size:15px;
+    float:left;
+}
+.hm_sk.sk_time {
+    float:left;
+    margin-top:8px;
+}
+.hm_sk.sk_time>span {
+    float:left;
+    width:15px;
+    height:15px;
+    line-height:15px;
+    text-align:center;
+    background: #333;
+    color:#fff;
+    margin-left:3px;
+}
+.hm_sk.sk_time>span:nth-child(3n) {
+    background:#fff;
+    color:#333;
+    width:5px;
+}
