@@ -1,12 +1,9 @@
 *,
 ::before,
 ::after{
-
-    margin: 0;
-    padding: 0;
-
+    margin: 0px;
+    padding: 0px;
     -webkit-tap-highlight-color: transparent;
-  
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
@@ -28,11 +25,8 @@ ul,ol{
 input{
     border: none;
     outline: none;
-
     -webkit-appearance: none;
 }
-
-
 .f_left{
     float: left;
 }
@@ -48,12 +42,10 @@ input{
     visibility: hidden;
     clear: both;
 }
-
 [class^="icon_"]{
-    background: url("../image/sprites.png") no-repeat;
+    background: url("../images/sprites.png") no-repeat;
     background-size: 200px 200px;
 }
-
 .m_l10{
     margin-left: 10px;
 }
