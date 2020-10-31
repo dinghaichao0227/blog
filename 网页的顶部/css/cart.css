@@ -1,0 +1,198 @@
+body{
+    background: #f5f5f5;
+    min-width: 300px;
+}
+/*顶部通栏*/
+.hm_topBar{
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid #ccc;
+    background: url("../images/header-bg.png") 0 0 / 1px 44px;
+    position: static;
+}
+.hm_topBar a{
+    width: 40px;
+    height: 44px;
+    padding: 12px 10px;
+    position: absolute;
+    top: 0;
+    /*让背景从内容开始平铺*/
+    background-origin: content-box;
+    /*没有做背景裁剪 背景图默认就是从边框显示*/
+    /*默认的就是
+    border-box  边框以外被裁剪掉
+    padding-box 内边距以外被裁剪掉
+    content-box 内容以外被裁剪掉
+    */
+    background-clip: content-box;
+}
+.hm_topBar .icon_back{
+    left: 0;
+    background-position: -20px 0;
+}
+.hm_topBar .icon_menu{
+    right: 0;
+    background-position: -60px 0;
+}
+.hm_topBar form{
+    width: 100%;
+    padding: 0 40px;
+}
+.hm_topBar form input{
+    width: 100%;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 7px;
+    padding: 0 10px;
+}
+
+
+.hm_safeTip{
+    height: 34px;
+    border-bottom: 1px solid #e0e0e0;
+    line-height: 33px;
+    background: #fff;
+    text-align: center;
+}
+.hm_safeTip > p{
+    position: relative;
+    font-size: 12px;
+    color: #666;
+    display: inline-block;
+    padding-left: 23px;
+}
+.hm_safeTip > p::before{
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    background: url("../images/safe_icon.png") no-repeat;
+    background-size: 18px 18px;
+    width: 18px;
+    height: 18px
+}
+.hm_shop{
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    background: #fff;
+    margin-top: 10px;
+}
+.hm_shop > .hm_shop_tit{
+    height: 34px;
+    line-height: 34px;
+    position: relative;
+}
+.hm_shop > .hm_shop_tit > .hm_shop_tit_left{
+    position: absolute;
+    width: 40px;
+}
+.hm_shop > .hm_shop_tit > .hm_shop_tit_right{
+    width: 100%;
+    padding-left: 40px;
+}
+.hm_shop > .hm_shop_tit > .hm_shop_tit_right > .imgbox{
+    float: left;
+    width: 15px;
+    height: 13px;
+    margin-top: 10px;
+}
+.hm_shop > .hm_shop_tit > .hm_shop_tit_right > .name{
+    float: left;
+
+}
+.hm_shop > .hm_shop_tit > .hm_shop_tit_right > .tip{
+    float: right;
+    color: #d8505c;
+    font-size: 12px;
+}
+
+.hm_product{
+    border-top: 1px solid #ccc;
+    height: 100px;
+    padding: 10px 0;
+}
+.hm_product_left{
+    position: absolute;
+    width: 40px;
+}
+.hm_product_right{
+    width: 100%;
+    padding-left: 40px;
+}
+.hm_product_right .product_img{
+    height: 80px;
+    width: 80px;
+    float: left;
+}
+.hm_product_right .product_img img{
+    width: 100%;
+    height: 100%;
+}
+.hm_product_right .product_info{
+    overflow:hidden;
+    padding: 0 10px;
+}
+.hm_product_right .product_info .name{
+    height:30px;
+    line-height: 30px;
+    display: block;
+    overflow: hidden;
+}
+.hm_product_right .product_info .price{
+    color: #d8505c;
+    padding-top: 5px;
+}
+.hm_check_box{
+    height: 34px;
+    width: 40px;
+    padding: 7px 10px;
+    background: url("../images/shop-icon.png") no-repeat;
+    background-size: 50px 100px;
+    background-origin: content-box;
+    background-clip: content-box;
+    display: block;
+}
+.hm_check_box[checked]{
+    background-position: -25px 0;
+}
+.option .f_left span{ 
+    border: 1px solid #ccc;
+    height: 24px;
+     width: 32px;
+     float: left;
+     text-align: center;
+
+}
+.option .f_left span:first-of-type{
+     border-top-left-radius: 2px;
+     border-bottom-left-radius: 2px;
+}
+.option .f_left span:last-of-type{
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.option .f_left input{
+    border-top:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    height: 24px;
+    width: 32px;
+    float: left;
+    text-align: center;
+}
+.option .f_right .up {
+    background:url("../images/delete_up.png")no-repeat;
+    background-size:20px 5px;
+    width:20px;
+    height:10px;
+    display:block;
+    margin-left:-1px;
+}
+.option .f_right .down {
+    background:url("../images/delete_down.png")no-repeat;
+    background-size:18px ;
+    width:18px;
+    height:10px;
+    display:block;
+    margin-top:-2px;
+}
