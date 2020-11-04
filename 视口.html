@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视口</title>
+    <style>
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+            height: 1000px;
+            background-color:pink ;
+         
+        }
+
+        @media screen and (max-width:678px) {
+            .container {
+                width: 100%;
+                background-color: blueviolet;
+            }
+
+        }
+
+        @media screen and (min-width:768px) and (max-width:920px) {
+            .container {
+                width:750 px;
+                background-color: brown;
+            }
+        }
+
+        @media screen and (min-width:920px) and (max-width:1200px) {
+            .container {
+                width: 950px;
+                background-color: chartreuse;
+            }
+
+        }
+
+        @media screen and (min-width:1200px) {
+            .container {
+                width: 1190px;
+                background-color: darkblue;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"></div>
+</body>
+
+</html>
