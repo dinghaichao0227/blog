@@ -196,3 +196,110 @@ body{
     display:block;
     margin-top:-2px;
 }
+.hm_check_box {
+    height:34px;
+    width:40px;
+    padding:7px 10px;
+    background-color: url("../images/shop-icon.png") no-repeat;
+    background-size: 50px 100px;
+    background-origin: content-box;
+    background-clip: content-box;
+    display: block;
+}
+.hm_check_box[checked] {
+    background-position: -25px 0;
+}
+.hm_win {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0 ,0 ,0.6 );
+    display:none;
+}
+.hm_win>.hm_win_box {
+    width:85%;
+    background:#fff;
+    margin:0 auto;
+    border-radius:6px;
+    padding:0 10px;
+    margin-top:200px;
+}
+.hm_win>.hm_win_box>.text {
+    line-height:75px;
+    text-align:center;
+    font-size:18px;
+    border-bottom:1px solid #ccc;
+}
+.hm_win>.hm_win_box>.btn {
+    padding:10px 0;
+}
+.hm_win>.hm_win_box>.btn a {
+    width:45%;
+    height:36px;
+    line-height: 36px;
+    text-align:center;
+    float:left;
+    border-radius:4px;
+}
+.hm_win>.hm_win_box>.btn>.cancal {
+    margin-right:10px;
+    border:1px solid #ccc;
+}
+.hm_win>.hm_win_box>.btn>.submit {
+    background: rgba(0,0,0,0.6);
+    color:#fff;
+}
+.bounceInDown {
+    -webkit-animation: bounceInDown 1s;
+    animation: bounceInDown 1s;
+}
+@keyframes bounceInDown {
+    0% {
+        opacity:0;
+        -webkit-transform:translateY(-3000px);
+        tranform:translateY(-3000px);
+    }
+    60% {
+        opacity:1;
+        -webkit-transform:translateY(30px);
+        transform:translateY(30px);
+    }
+    75% {
+        -webkit-transform:translateY(-15px);
+        transform:translateY(-15px);
+    }
+    90% {
+        -webkit-transform:translateY(5px);
+        transform:translateY(5px);
+    }
+    100% {
+        -webkit-transform:translateY(5px);
+        transform:translateY(5px);
+    }
+}
+@-webkit-keyframes bounceInDown {
+    0% {
+        opacity:0;
+        -webkit-transform:translateY(-3000px);
+        tranform:translateY(-3000px);
+    }
+    60% {
+        opacity:1;
+        -webkit-transform:translateY(30px);
+        transform:translateY(30px);
+    }
+    75% {
+        -webkit-transform:translateY(-15px);
+        transform:translateY(-15px);
+    }
+    90% {
+        -webkit-transform:translateY(5px);
+        transform:translateY(5px);
+    }
+    100% {
+        -webkit-transform:translateY(5px);
+        transform:translateY(5px);
+    }
+}
