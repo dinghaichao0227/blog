@@ -1,0 +1,22 @@
+#box {
+    width: 100%;
+    height: 400px;
+
+}
+
+#box div:nth-child(1) {
+    background-color: red;
+}
+
+#box div:nth-child(2) {
+    background-color: blue;
+}
+
+#box div:nth-child(3) {
+    background-color: green;
+}
+#box div {
+    width: 100%;
+    float: left;
+    height: 200px;
+}
