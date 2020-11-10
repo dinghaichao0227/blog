@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本框</title>
+    <style>
+        /* * {
+            padding:0;
+            margin:0;
+        } */
+        
+        #box div {
+            display: flex;
+            /* height:30px; */
+            align-items: flex-start;
+            flex: 0 0 30px;
+        }
+        
+        #box div label {
+            text-align: right;
+            flex: 0 0 100px;
+            justify-content: space-between;
+        }
+        
+        #box {
+            display: flex;
+            flex-direction: column;
+            /* vertical-align:-webkit-baseline-middle ; 垂直居中 */
+        }
+    </style>
+</head>
+
+
+<div id="box">
+    <div>
+        <label>姓名：</label>
+        <input type="text">
+    </div>
+    <div>
+        <label>请输入密码：</label>
+        <input type="text">
+    </div>
+</div>
+
+</body>
+
+</html>
