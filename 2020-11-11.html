@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 今天看了felx布局和vue但是我感觉vue没有掌握扎实，我又看了几遍，
+    今天就传了一个代码就是vue的，没有引入vue的源代码，没有那样的样式
+vue的代码就要你自己去引入了，加油-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList</title>
+    <style>
+        .app-button {
+            display: flex;
+        }
+        
+        .button {
+            width: 100px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #333;
+            color: #FFF;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        .button:hover {
+            background-color: #929292;
+        }
+        
+        .app-await {
+            margin-top: 30px;
+            width: 300px;
+            min-height: 50px;
+            border: 1px solid #333;
+        }
+        
+        .app-complete {
+            margin-top: 20px;
+            width: 300px;
+            min-height: 50px;
+            border: 1px solid red;
+        }
+        
+        .app-await-item {
+            width: 200px;
+            background-color: #878454;
+        }
+        
+        .app-complete-item {
+            width: 200px;
+            background-color: #ab8875;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="app-button">
+            <input v-model="inputItem" type="text">
+            <div class="button" @click="handlesubmit">提交</div>
+        </div>
+
+        <div class="app-await">
+            待完成
+            <ul class="app-await-item" v-for="(item, index) in awaitItems" :key="index" @click="handleClick(item)">{{item}}</ul>
+        </div>
+
+        <div class="app-complete">
+            已完成
+            <ul class="app-complete-item" v-for="(opt, key) in completeItems" @click="handleDelete(opt)">{{opt}}</ul>
+        </div>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                inputItem: '',
+                awaitItems: [],
+                completeItems: []
+            },
+            methods: {
+                handlesubmit() {
+                    this.awaitItems.push(this.inputItem);
+                    this.inputItem = '';
+                },
+                handleClick(item) {
+                    let itemIndexOf = this.awaitItems.indexOf(item);
+                    this.awaitItems.splice(itemIndexOf, 1);
+                    this.completeItems.push(item);
+                },
+                handleDelete(opt) {
+                    let optIndexOf = this.completeItems.indexOf(opt);
+                    this.completeItems.splice(optIndexOf, 1);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
