@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- 这里的一个获取位置的几行代码，这也是这回期末的考试题自己反复练习
+    然后就上传了 -->
+
+<body>
+    <script>
+        function getMyPosition() {
+            if (window.navigator.geolocation) {
+                alert("当前位置");
+                navigator.geolocation.getCurrentPosition(successPosition, errorposition);
+            } else {
+                alert("当前浏览气不支持");
+            }
+        }
+
+        function successPosition(position) {
+            var jd = position.coords.longitude;
+            var wd = position.coords.latitude;
+            alert(jd + "," + wd);
+        }
+
+        function errorposition() {
+            alert("获取位置失败");
+        }
+        getMyPosition();
+    </script>
+</body>
+
+</html>
