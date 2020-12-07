@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三角形</title>
+</head>
+
+<body>
+    <canvas id="canvar"></canvas>
+    <script>
+        var canvar = document.getElementById("canvar");
+        var context = canvar.getContext("2d");
+        canvar.width = 900;
+        canvar.height = 600;
+        canvar.style.border = "1px solid #eee";
+        context.beginPath();
+        context.moveTo(100, 100);
+        context.lineTo(200, 100);
+        context.lineTo(200, 500);
+        context.stroke();
+        context.fill();
+    </script>
+</body>
+
+</html>
+<!-- 这是html5的第二个考试题三角形，感觉这个还是很简单的哈哈，
+    努力就会成功，加油！！！ -->
