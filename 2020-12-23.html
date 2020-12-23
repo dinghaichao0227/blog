@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <body>
+        姓名：<input type="text" id="username"> 年龄：
+        <input type="text" id="age">
+        <input type="button" value="sessionStorage 设置数据" id="sessionStorageId">
+        <input type="button" value="sessionStorage 获取数据" id="getsessionStorageId">
+        <input type="button" value="sessionStorage 清除所有数据" id="clearsessionStorageId">
+        <!-- <script>
+            document.getElementById("sessionStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                var age = document.getElementById("age").value;
+                var user = {
+                    姓名: username,
+                    年龄: age
+                }
+                window.sessionStorage.setItem("user", JSON.stringify(user));
+            }
+            document.getElementById("getsessionStorageId").onclick = function() {
+                var value = window.sessionStorage.getItem("user");
+                alert(value);
+            };
+            document.getElementById("clearsessionStorageId").onclick = function() {
+                window.sessionStorage.clear();
+            }
+        </script> -->
+        <script>
+            document.getElementById("sessionStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                var age = document.getElementById("age").value;
+                var user = {
+                    姓名: username,
+                    年龄: age
+                }
+                window.sessionStorage.setItem("user", JSON.stringify(user));
+
+            }
+            document.getElementById("getsessionStorageId").onclick = function() {
+                var value = window.sessionStorage.getItem("user");
+                alert(value);
+            };
+            document.getElementById("clearsessionStorageId").onclick = function() {
+                window.sessionStorage.clear();
+            }
+        </script>
+    </body>
+</body>
+<!-- 这个是今天一个提交表单的一个新的方式但是这个新的方法和一个之前的方法 -->
+
+</html>
+
+<!-- 下面就是之前的方法，可以形成一个对比，上面和下面的也是有所不一样的
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <body>
+        名字 <input type="text" id="username">
+        <input type="text" value="localStorage 设置数据" id="localStorageId">
+        <input type="text" value="getlocalStorage 添加数据" id="getlocalStorageId">
+        <input type="text" value="removelocalStorage 删除数据" id="removelocalStorageId">
+        <script>
+            document.getElementById("localStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                window.localStorage.setItem("username", username);
+            };
+            document.getElementById("getlocalStorageId").onclick = function() {
+                var username = window.localStorage.getItem("username");
+                alert(username);
+            };
+            document.getElementById("removelocalStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                window.localStorage.removeItem("username");
+                // alert(username);
+            }
+        </script>
+        <!-- <script>
+            document.getElementById("localStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                window.localStorage.setItem("username", username);
+            };
+            document.getElementById("getlocalStorageId").onclick = function() {
+                var username = window.localStorage.getItem("username");
+                alert(username);
+            };
+            document.getElementById("removelocalStorageId").onclick = function() {
+                var username = document.getElementById("username").value;
+                window.localStorage.removeItem("username");
+            }
+        </script> -->
+    </body>
+</body>
+
+</html>
