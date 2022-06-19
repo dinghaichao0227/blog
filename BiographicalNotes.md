@@ -2,7 +2,7 @@
 ## 个人信息
 ----
 * 丁海超 / 男 / 2000
-* 专科 / 辽宁生态工程职业学校 / 软件技术
+* 专科 / 辽宁生态工程职业学院 / 软件技术
 * 手机 & 微信：15142257040
 * E-mail： dinghaichao27@gmail.com
 * GitHub：https://github.com/dinghaichao0227
