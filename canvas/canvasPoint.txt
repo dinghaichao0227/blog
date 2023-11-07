@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Pie Chart</title>
+</head>
+
+<body>
+  <canvas id="pieCanvas" width="800" height="600"></canvas>
+
+  <script>
+    /* 获取 Canvas 元素和上下文 */
+    var canvas = document.getElementById('pieCanvas');
+    var ctx = canvas.getContext('2d');
+
+    /* 设置数据 */
+    var data = [
+      { x: 100, y: 100, value: 30 },
+      { x: 200, y: 300, value: 50 },
+      { x: 100, y: 400, value: 70 },
+      // 添加更多数据点...
+    ];
+
+    /* 绘制扇形 */
+    function drawPie() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+
+      var totalValue = data.reduce(function (acc, item) {
+        return acc + item.value;
+      }, 0);
+
+      var startAngle = 0;
+      var endAngle = 0;
+
+      for (var i = 0; i < data.length; i++) {
+        var item = data[i];
+        var sliceAngle = (item.value / totalValue) * 2 * Math.PI;
+
+        endAngle = startAngle + sliceAngle;
+
+        ctx.beginPath();
+        ctx.moveTo(item.x, item.y);
+        ctx.arc(item.x, item.y, 50, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = getRandomColor(); // 设置扇形的填充颜色
+        ctx.fill();
+
+        startAngle = endAngle;
+      }
+    }
+
+    /* 生成随机颜色 */
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    /* 调用绘制函数 */
+    drawPie();
+  </script>
+</body>
+
+</html>

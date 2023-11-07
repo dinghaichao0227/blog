@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scatter Plot with Canvas</title>
+</head>
+
+<body>
+  <canvas id="scatterCanvas" width="800" height="600"></canvas>
+
+  <script>
+    /* 获取 Canvas 元素和上下文 */
+    var canvas = document.getElementById('scatterCanvas');
+    var ctx = canvas.getContext('2d');
+
+    /* 设置数据 */
+    var data = [
+      { x: 100, y: 200 },
+      { x: 200, y: 300 },
+      { x: 300, y: 400 },
+      // 添加更多数据点...
+    ];
+
+    /* 设置绘图参数 */
+    var pointRadius = 5; // 点的半径
+
+    /* 绘制散点图 */
+    function drawScatterPlot() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+
+      for (var i = 0; i < data.length; i++) {
+        var point = data[i];
+
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, pointRadius, 0, 2 * Math.PI); // 绘制圆形点
+        ctx.fillStyle = 'blue'; // 设置点的填充颜色
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+
+    /* 调用绘制函数 */
+    var crosshairColor = 'red'; // 十字虚线的颜色
+    var crosshairWidth = 1; // 十字虚线的宽度
+    var crosshairDash = [5, 5]; // 十字虚线的样式
+    var showCoordinates = true; // 是否展示坐标
+    var coordinatesColor = 'black'; // 坐标文本的颜色
+    var coordinatesFont = '14px Arial'; // 坐标文本的字体
+
+    /* 绘制十字虚线和展示坐标 */
+    function drawCrosshair(event) {
+      var rect = canvas.getBoundingClientRect();
+      var mouseX = event.clientX - rect.left;
+      var mouseY = event.clientY - rect.top;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+
+      // 绘制横线
+      ctx.beginPath();
+      ctx.setLineDash(crosshairDash);
+      ctx.moveTo(0, mouseY);
+      ctx.lineTo(canvas.width, mouseY);
+      ctx.lineWidth = crosshairWidth;
+      ctx.strokeStyle = crosshairColor;
+      ctx.stroke();
+
+      // 绘制竖线
+      ctx.beginPath();
+      ctx.setLineDash(crosshairDash);
+      ctx.moveTo(mouseX, 0);
+      ctx.lineTo(mouseX, canvas.height);
+      ctx.lineWidth = crosshairWidth;
+      ctx.strokeStyle = crosshairColor;
+      ctx.stroke();
+
+      // 展示坐标
+      if (showCoordinates) {
+        ctx.fillStyle = coordinatesColor;
+        ctx.font = coordinatesFont;
+        ctx.fillText(`(${mouseX},${mouseY})`, mouseX + 10, mouseY - 10);
+      }
+    }
+
+    /* 监听鼠标移动事件 */
+    canvas.addEventListener('mousemove', drawCrosshair);
+
+    /* 监听鼠标离开事件，清空画布 */
+    canvas.addEventListener('mouseout', function () {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+    drawScatterPlot();
+
+  </script>
+</body>
+
+</html>

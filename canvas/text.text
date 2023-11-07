@@ -1,0 +1,195 @@
+<canvas width="2080px" height="980x"></canvas>
+<script>
+  //需求：利用面向对象的方法和canvas将一组数据制作成一幅折线图
+  //模拟从后台获取数据
+  var data = [
+    { x: 100, y: 120 },
+    { x: 200, y: 160 },
+    { x: 300, y: 240 },
+    { x: 400, y: 320 },
+    { x: 500, y: 80 }
+  ]
+  //构造函数
+  var LineChart = function (ctx) {
+    // 获取绘图工具箱
+    this.ctx = document.querySelector("canvas").getContext("2d");
+    console.log(this.ctx);
+    // 获取画布的长度和宽度
+    this.cWidth = this.ctx.canvas.width;
+    this.cHeight = this.ctx.canvas.height;
+    // 设置坐标系的外边距
+    this.space = 20;
+    // 设置坐标系网格的大小
+    this.grid = 10;
+    //设置坐标系箭头的大小
+    this.arrowSize = 10;
+    //设置数据点的大小
+    this.dottedSize = 6;
+    //设置原点的坐标
+    this.x0 = this.space;
+    this.y0 = this.cHeight - this.space;
+  };
+  //传递data数据,
+  LineChart.prototype.init = function (data) {
+    //传递数据之前先绘制网格和坐标系
+    this.drawGrid();
+    this.drawAxis();
+    //将数据传递给绘制点的方法进行绘制
+    this.drawDotted(data);
+  };
+  //绘制网格
+  LineChart.prototype.drawGrid = function () {
+    // 先绘制X方向的线条
+    var xLineTotal = Math.floor(this.cHeight / this.grid);
+    this.ctx.strokeStyle = "#eee";
+    for (var i = 0; i <= xLineTotal; i++) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(0, i * this.grid - 0.5);
+      this.ctx.lineTo(this.cWidth, i * this.grid - 0.5);
+      this.ctx.stroke();
+    }
+    // 绘制y方向的线条
+    var yLineTotal = Math.floor(this.cWidth / this.grid);
+    for (var j = 0; j <= yLineTotal; j++) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(j * this.grid - 0.5, 0);
+      this.ctx.lineTo(j * this.grid - 0.5, this.cHeight);
+      this.ctx.stroke();
+    }
+  };
+  //绘制坐标系
+  LineChart.prototype.drawAxis = function () {
+    // 绘制X轴
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x0, this.y0);
+    this.ctx.lineTo(this.cWidth - this.space, this.y0);
+    this.ctx.lineTo(this.cWidth - this.space - this.arrowSize, this.y0 + this.arrowSize / 2);
+    this.ctx.lineTo(this.cWidth - this.space - this.arrowSize, this.y0 - this.arrowSize / 2);
+    this.ctx.lineTo(this.cWidth - this.space, this.y0);
+    this.ctx.strokeStyle = "#000";
+    this.ctx.stroke();
+    this.ctx.fill();
+    //绘制y轴
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.x0, this.y0);
+    this.ctx.lineTo(this.x0, this.space);
+    this.ctx.lineTo(this.x0 + this.arrowSize / 2, this.space + this.arrowSize);
+    this.ctx.lineTo(this.x0 - this.arrowSize / 2, this.space + this.arrowSize);
+    this.ctx.lineTo(this.x0, this.space);
+    this.ctx.strokeStyle = "#000";
+    this.ctx.stroke();
+    this.ctx.fill();
+  }
+  //绘制点和连线
+  LineChart.prototype.drawDotted = function () {
+    //数据的坐标不是canvas的坐标，需要将数据的坐标转换成canvas坐标
+    var that = this;
+    var prevCanvasX = 0;
+    var prevCanvasY = 0;
+    data.forEach(function (item, i) {
+      //计算数据点的坐标
+      var canvasX = that.x0 + item.x;
+      var canvasY = that.y0 - item.y;
+
+      //开始绘制数据点
+      that.ctx.beginPath();
+      that.ctx.moveTo(canvasX - that.dottedSize / 2, canvasY - that.dottedSize / 2);
+      that.ctx.lineTo(canvasX + that.dottedSize / 2, canvasY - that.dottedSize / 2);
+      that.ctx.lineTo(canvasX + that.dottedSize / 2, canvasY + that.dottedSize / 2);
+      that.ctx.lineTo(canvasX - that.dottedSize / 2, canvasY + that.dottedSize / 2);
+      that.ctx.fill();
+      // 开始连线
+      if (i == 0) {
+        that.ctx.beginPath();
+        that.ctx.moveTo(that.x0, that.y0);
+        that.ctx.lineTo(canvasX, canvasY);
+        that.ctx.setLineDash([5]);
+        that.ctx.stroke();
+      } else {
+        that.ctx.beginPath();
+        that.ctx.moveTo(prevCanvasX, prevCanvasY);
+        that.ctx.lineTo(canvasX, canvasY);
+        that.ctx.setLineDash([5]);
+        that.ctx.stroke();
+      }
+      prevCanvasX = canvasX;
+      prevCanvasY = canvasY;
+    });
+  }
+  // 初始化构造函数
+  var lineChart = new LineChart();
+  lineChart.init(data);
+  // See https://github.com/ecomfe/echarts-stat
+  echarts.registerTransform(ecStat.transform.regression);
+  const data = [
+    [0.067732, 3.176513],
+    [0.42781, 3.816464],
+    [0.995731, 4.550095],
+    [0.738336, 4.256571],
+    [0.981083, 4.560815],
+    [0.526171, 3.929515],
+    [0.378887, 3.52617],
+    [0.033859, 3.156393],
+    [0.132791, 3.110301],
+
+  ];
+  option = {
+    dataset: [
+      {
+        source: data
+      },
+      {
+        transform: {
+          type: 'ecStat:regression'
+          // 'linear' by default.
+          // config: { method: 'linear', formulaOn: 'end'}
+        }
+      }
+    ],
+    title: {
+      text: 'Linear Regression',
+      subtext: 'By ecStat.regression',
+      sublink: 'https://github.com/ecomfe/echarts-stat',
+      left: 'center'
+    },
+    legend: {
+      bottom: 5
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross'
+      }
+    },
+    xAxis: {
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
+    },
+    yAxis: {
+      splitLine: {
+        lineStyle: {
+          type: 'dashed'
+        }
+      }
+    },
+    series: [
+      {
+        name: 'scatter',
+        type: 'scatter'
+      },
+      {
+        name: 'line',
+        type: 'line',
+        datasetIndex: 1,
+        symbolSize: 0.5,
+        symbol: 'circle',
+        label: { show: true, fontSize: 16 },
+        labelLayout: { dx: -20 },
+        encode: { label: 2, tooltip: 1 }
+      }
+    ]
+  };
+</script>
