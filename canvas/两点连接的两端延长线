@@ -1,0 +1,25 @@
+// 获取 Canvas 元素
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+// 定义两个点的坐标
+var point1 = { x: 100, y: 100 };
+var point2 = { x: 200, y: 200 };
+
+// 计算连线方程
+var slope = (point2.y - point1.y) / (point2.x - point1.x);
+var yIntercept = point1.y - slope * point1.x;
+
+// 计算延长的起点和终点坐标
+var extendLength = 100; // 延长的长度
+var extendStartX = point1.x - extendLength;
+var extendStartY = slope * extendStartX + yIntercept;
+
+var extendEndX = point2.x + extendLength;
+var extendEndY = slope * extendEndX + yIntercept;
+
+// 绘制两点之间的连线及延长部分
+ctx.beginPath();
+ctx.moveTo(extendStartX, extendStartY);
+ctx.lineTo(extendEndX, extendEndY);
+ctx.stroke();

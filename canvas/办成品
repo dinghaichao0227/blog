@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Grid with Mouse Wheel</title>
+</head>
+
+<body>
+  <canvas id="gridCanvas" width="800" height="600" style="background-color:#808080;"></canvas>
+
+  <script>
+    function loadImage(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.src = src;
+        img.addEventListener("load", () => resolve(img));
+        img.addEventListener("error", () => resolve(null));
+      });
+    }
+
+    const limit = (min, max) => val => Math.min(Math.max(val, min), max);
+
+    const imgUrl = "https://files.1card1.cn/mps/0/20191111/2bd92a35ff644b478c6becdf753fc43a.jpg";
+
+    ; !async function f() {
+      const cvs = document.getElementById("gridCanvas");
+      const ctx = cvs.getContext("2d");
+
+      const img = await loadImage(imgUrl);
+      if (!img) return;
+      const WIDTH = cvs.width = img.width / 2;
+      const HEIGHT = cvs.height = img.height / 2;
+
+      const current = { x: 0, y: 0, width: WIDTH, height: HEIGHT };
+      let scale = 1;
+
+      /* 设置数据 */
+      var data = [
+        { x: 100, y: 200 },
+        { x: 200, y: 300 },
+        { x: 300, y: 400 },
+        // 添加更多数据点...
+      ];
+
+      /* 设置绘图参数 */
+      var pointRadius = 5; // 点的半径
+
+      /* 绘制散点图 */
+      function drawScatterPlot(dx = 0, dy = 0) {
+        // ctx.clearRect(0, 0, cvs.width, cvs.height); // 清空画布
+
+        for (var i = 0; i < data.length; i++) {
+          var point = data[i];
+
+          ctx.beginPath();
+          ctx.arc(point.x + dx, point.y + dy, pointRadius, 0, 2 * Math.PI); // 绘制圆形点
+          ctx.fillStyle = 'blue'; // 设置点的填充颜色
+          ctx.fill();
+          ctx.closePath();
+        }
+      }
+
+      function zoom(position, direction) {
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        const origin = {
+          x: position.x - current.x,
+          y: position.y - current.y
+        };
+
+        scale += (direction * 0.2);
+
+        const newWidth = WIDTH * scale;
+        const newHeight = HEIGHT * scale;
+
+        const dx = current.x + (origin.x - (origin.x / current.width * newWidth));
+        const dy = current.y + (origin.y - (origin.y / current.height * newHeight));
+
+        current.x = dx;
+        current.y = dy;
+        current.width = newWidth;
+        current.height = newHeight;
+        ctx.drawImage(img, dx, dy, newWidth, newHeight);
+        drawScatterPlot(dx, dy)
+      }
+
+      zoom({ x: 0, y: 0 }, 1);
+
+
+      cvs.addEventListener("mousewheel", e => {
+        e.preventDefault();
+        const direction = limit(-1, 1)(e.deltaY || e.detail);
+        const position = { x: e.clientX, y: e.clientY };
+        zoom(position, direction);
+        // drawScatterPlot()
+
+      });
+
+      // document.getElementById("reset").addEventListener("click", function () {
+      //   scale = 1;
+      //   current.x = 0;
+      //   current.y = 0;
+      //   current.width = WIDTH;
+      //   current.height = HEIGHT;
+      //   zoom({ x: 0, y: 0 }, 1);
+      // });
+
+      drawScatterPlot()
+    }();
+
+  </script>
+</body>
+
+</html>

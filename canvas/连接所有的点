@@ -1,0 +1,40 @@
+// 创建 Canvas 元素并获取上下文
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+document.body.appendChild(canvas);
+
+// 设置 Canvas 的宽度和高度
+canvas.width = 500;
+canvas.height = 500;
+
+// 定义点和线的坐标
+const points = [
+  { x: 100, y: 100 },
+  { x: 200, y: 200 },
+  { x: 300, y: 150 },
+  { x: 400, y: 250 }
+];
+
+// 绘制函数
+function draw() {
+  // 清空 Canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 绘制起始点
+  ctx.beginPath();
+  ctx.arc(points[0].x, points[0].y, 5, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // 连接所有点
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, points[0].y);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i].x, points[i].y);
+  }
+
+  // 绘制线条
+  ctx.stroke();
+}
+
+// 调用绘制函数
+draw();

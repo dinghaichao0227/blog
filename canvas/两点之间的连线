@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Canvas绘制两个点并连线</title>
+  <style>
+    #myCanvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+
+  <script>
+    // 获取画布元素
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+
+    // 绘制第一个点
+    var point1X = 100;
+    var point1Y = 100;
+    var point1Size = 5;
+    context.fillStyle = "red";
+    context.beginPath();
+    context.arc(point1X, point1Y, point1Size, 0, 2 * Math.PI);
+    context.fill();
+
+    // 绘制第二个点
+    var point2X = 300;
+    var point2Y = 200;
+    var point2Size = 5;
+    context.fillStyle = "blue";
+    context.beginPath();
+    context.arc(point2X, point2Y, point2Size, 0, 2 * Math.PI);
+    context.fill();
+
+    // 连接两个点
+    context.strokeStyle = "green";
+    context.beginPath();
+    context.moveTo(point1X, point1Y);
+    context.lineTo(point2X, point2Y);
+    context.stroke();
+  </script>
+</body>
+
+</html>// 获取 Canvas 元素
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+// 定义圆心坐标和半径
+var center = { x: 200, y: 200 };
+var radius = 100;
+
+// 定义起始角度和结束角度（以弧度为单位）
+var startAngle1 = 45; // 正角度
+var endAngle1 = -45; // 负角度
+var startAngle2 = 135; // 正角度
+var endAngle2 = -135; // 负角度
+
+// 将角度转换为弧度
+var startAngleRadians1 = startAngle1 * (Math.PI / 180);
+var endAngleRadians1 = endAngle1 * (Math.PI / 180);
+var startAngleRadians2 = startAngle2 * (Math.PI / 180);
+var endAngleRadians2 = endAngle2 * (Math.PI / 180);
+
+// 绘制第一个扇形
+ctx.beginPath();
+ctx.moveTo(center.x, center.y);
+ctx.arc(center.x, center.y, radius, startAngleRadians1, endAngleRadians1);
+ctx.closePath();
+ctx.fillStyle = 'red'; // 设置第一个扇形的填充颜色
+ctx.fill();
+
+// 绘制第二个扇形
+ctx.beginPath();
+ctx.moveTo(center.x, center.y);
+ctx.arc(center.x, center.y, radius, startAngleRadians2, endAngleRadians2);
+ctx.closePath();
+ctx.fillStyle = 'blue'; // 设置第二个扇形的填充颜色
+ctx.fill();
