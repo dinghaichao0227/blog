@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <canvas id="scatterCanvas" width="800" height="600"></canvas>
+  <canvas id="scatterCanvas" width="400" height="400" style="background-color: aqua;"></canvas>
 
   <script>
     /* 获取 Canvas 元素和上下文 */
@@ -17,14 +17,17 @@
 
     /* 设置数据 */
     var data = [
-      { x: 234, y: 345 },
-      { x: 135, y: 246 },
-      { x: 234, y: 432 },
+      { x: 90, y: 145 },
+      { x: 150, y: 180 },
+
       // 添加更多数据点...
     ];
-
+    var scale = 1
+    var scaleFactor = 0.2
     /* 设置绘图参数 */
     var pointRadius = 10; // 点的半径
+    var canvasCenterX = canvas.width / 2;
+    var canvasCenterY = canvas.height / 2;
 
     /* 绘制散点图 */
     function drawScatterPlot() {
@@ -41,6 +44,48 @@
       }
     }
 
+    canvas.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var wheelDelta = e.deltaY;
+      var zoomFactorIncrement = 0.1;
+      var zoomFactor = 1;
+      var offsetX = e.offsetX;
+      var offsetY = e.offsetY;
+
+
+      // 保存当前的十字虚线宽度和样式
+      var prevCrosshairWidth = crosshairWidth;
+      var prevCrosshairDash = crosshairDash.slice();
+      if (wheelDelta < 0) {
+        zoomFactor += zoomFactorIncrement;
+        var offerSetFromCenterX = offsetX - canvasCenterX;
+        var offerSetFromCenterY = offsetY - canvasCenterY;
+        var scaledOffSetX = canvasCenterX + offerSetFromCenterX * zoomFactor;
+        var scaledOffSetY = canvasCenterY + offerSetFromCenterY * zoomFactor;
+        drawScatterPlot();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(scaledOffSetX, scaledOffSetY);
+        ctx.scale(zoomFactor, zoomFactor);
+        ctx.translate(-scaledOffSetX, -scaledOffSetY);
+      } else {
+        zoomFactor -= zoomFactorIncrement;
+        var offerSetFromCenterX = offsetX - canvasCenterX;
+        var offerSetFromCenterY = offsetY - canvasCenterY;
+        var scaledOffSetX = canvasCenterX + offerSetFromCenterX * zoomFactor;
+        var scaledOffSetY = canvasCenterY + offerSetFromCenterY * zoomFactor;
+        drawScatterPlot();
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.translate(scaledOffSetX, scaledOffSetY);
+        ctx.scale(zoomFactor, zoomFactor);
+        ctx.translate(-scaledOffSetX, -scaledOffSetY);
+      }
+      drawScatterPlot();
+
+    })
+
+
+
+
     /* 调用绘制函数 */
     var crosshairColor = 'red'; // 十字虚线的颜色
     var crosshairWidth = 1; // 十字虚线的宽度
@@ -50,51 +95,48 @@
     var coordinatesFont = '14px Arial'; // 坐标文本的字体
 
     /* 绘制十字虚线和展示坐标 */
-    function drawCrosshair(event) {
-      var rect = canvas.getBoundingClientRect();
-      var mouseX = event.clientX - rect.left;
-      var mouseY = event.clientY - rect.top;
+    // function drawCrosshair(event) {
+    //   var rect = canvas.getBoundingClientRect();
+    //   var mouseX = event.clientX - rect.left;
+    //   var mouseY = event.clientY - rect.top;
 
-      // ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
-      drawScatterPlot()
-      // 绘制横线
-      ctx.beginPath();
-      ctx.setLineDash(crosshairDash);
-      ctx.moveTo(0, mouseY);
-      ctx.lineTo(canvas.width, mouseY);
-      ctx.lineWidth = crosshairWidth;
-      ctx.strokeStyle = crosshairColor;
-      ctx.stroke();
+    //   // ctx.clearRect(0, 0, canvas.width, canvas.height); // 清空画布
+    //   drawScatterPlot()
+    //   // 绘制横线
+    //   ctx.beginPath();
+    //   ctx.setLineDash(crosshairDash);
+    //   ctx.moveTo(0, mouseY);
+    //   ctx.lineTo(canvas.width, mouseY);
+    //   ctx.lineWidth = crosshairWidth;
+    //   ctx.strokeStyle = crosshairColor;
+    //   ctx.stroke();
 
-      // 绘制竖线
-      ctx.beginPath();
-      ctx.setLineDash(crosshairDash);
-      ctx.moveTo(mouseX, 0);
-      ctx.lineTo(mouseX, canvas.height);
-      ctx.lineWidth = crosshairWidth;
-      ctx.strokeStyle = crosshairColor;
-      ctx.stroke();
+    //   // 绘制竖线
+    //   ctx.beginPath();
+    //   ctx.setLineDash(crosshairDash);
+    //   ctx.moveTo(mouseX, 0);
+    //   ctx.lineTo(mouseX, canvas.height);
+    //   ctx.lineWidth = crosshairWidth;
+    //   ctx.strokeStyle = crosshairColor;
+    //   ctx.stroke();
 
-      // 展示坐标
-      if (showCoordinates) {
-        ctx.fillStyle = coordinatesColor;
-        ctx.font = coordinatesFont;
-        ctx.fillText(`(${mouseX},${mouseY})`, mouseX + 10, mouseY - 10);
-      }
-    }
+    //   // 展示坐标
+    //   if (showCoordinates) {
+    //     ctx.fillStyle = coordinatesColor;
+    //     ctx.font = coordinatesFont;
+    //     ctx.fillText(`(${mouseX},${mouseY})`, mouseX + 10, mouseY - 10);
+    //   }
+    // }
     var isDialog = false
     var dataItem = null // data 的每一行数据
     canvas.addEventListener('mousedown', function (e) {
-      console.log(e, 2222);
       data.map(item => {
         if (
           (item.x - e.offsetX <= pointRadius * 2 && item.x - e.offsetX >= -pointRadius)
           &&
           (item.y - e.offsetY <= pointRadius * 2 && item.y - e.offsetY >= -pointRadius)
         ) {
-          // if () {
           dataItem = item
-          console.log(dataItem, 888);
           isDialog = true
         }
       })
@@ -112,7 +154,7 @@
 
       }
 
-      drawCrosshair(event)
+      // drawCrosshair(event)
     });
 
 
